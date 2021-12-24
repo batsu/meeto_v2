@@ -1,3 +1,13 @@
+$color-primary: #3046C5;
+$color-secondary: #5637dd;
+$color-pale: #CEC8FF;
+$color-mid: #901CAD;
+$color-dark: #60106b;
+$color-black-transparent: rgba(0, 0, 0, 0.5);
+
+$body-font: "Open Sans", sans-serif;
+$header-font: "Lobster", cursive;
+
 body {
     font-family: "Montserrat";
 }
@@ -90,12 +100,6 @@ body, html {
   width: 100%;
   text-align: center;
   color: #000;
-}
-
-.cropped {
-  height: 80px;
-  width: 160px;
-  object-fit: cover;
 }
 
 .caption span.border {
