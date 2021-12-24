@@ -40,69 +40,76 @@ footer a:hover {
 body, html {
   height: 100%;
   margin: 0;
+  font-size: 16px;
 }
 
-    .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5 {
-        position: relative;
-        opacity: 0.65;
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      
-      }
-      .bgimg-1 {
-        background-image: url("/img/appt.jpg");
-        min-height: 100%;
-      }
-      
-      .bgimg-2 {
-        background-image: url("/img/hangout.jpg");
-        min-height: 400px;
-      }
-      
-      .bgimg-3 {
-        background-image: url("/img/concert.jpg");
-        min-height: 400px;
-      }
-      
-      .bgimg-4 {
-        background-image: url("/img/whatever.jpg");
-        min-height: 400px;
-      }
-      
-      .bgimg-5 {
-        background-image: url("/img/end.jpg");
-        min-height: 400px;
-      }
-      
-      .caption {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        width: 100%;
-        text-align: center;
-        color: #000;
-      }
-      
-      .caption span.border {
-        background-color: #111;
-        color: #fff;
-        padding: 18px;
-        font-size: 25px;
-        letter-spacing: 10px;
-      }
-      
-      /* Turn off parallax scrolling for tablets and phones */
-      @media only screen and (max-device-width: 1024px) {
-        .bgimg-1, .bgimg-2, .bgimg-3 {
-          background-attachment: scroll;
-        }
-      }
+.bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5 {
+    position: relative;
+    opacity: 0.65;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+}
+.bgimg-1 {
+  background-image: url("/img/appt.jpg");
+  min-height: 100%;
+}
+
+.bgimg-2 {
+  background-image: url("/img/hangout.jpg");
+  min-height: 400px;
+}
+
+.bgimg-3 {
+  background-image: url("/img/concert.jpg");
+  min-height: 400px;
+}
+
+.bgimg-4 {
+  background-image: url("/img/whatever.jpg");
+  min-height: 400px;
+}
+
+.bgimg-5 {
+  background-image: url("/img/end.jpg");
+  min-height: 400px;
+}
+
+.paralax-p {
+  max-width: 400px;
+  font-size: 1.25em;
+  margin: 0 auto;
+}
+
+.caption {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 100%;
+  text-align: center;
+  color: #000;
+}
+
+.caption span.border {
+  background-color: rgba(14, 14, 14, 0.788);
+  color: #fff;
+  padding: 18px;
+  font-size: 1.5em;
+  letter-spacing: 10px;
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+  .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-4, .bgimg-5 {
+    background-attachment: scroll;
+  }
+}
 
 .modal-backdrop.show {
   background-color: rgb(153, 104, 104);
-  opacity: .1;
+  opacity: .5;
 }
 
 body.modal-open {
@@ -110,7 +117,8 @@ body.modal-open {
 }
 
 .modal-open {
-  overflow: inherit;
+  overflow: hidden;
+  /*inherit?*/
 }
 
 .navbar {

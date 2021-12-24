@@ -25,8 +25,8 @@
 
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <a class="navbar-brand" href="#">
-                <img src="img/meeto.png" class="image-fluid" height="100" alt="" loading="lazy">
+            <a class="navbar-brand" href="/">
+                <img src="img/meeto.png" class="image-fluid" height="80" alt="" loading="lazy">
               </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -35,7 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">About</a>
@@ -57,7 +57,7 @@
               </ul>
               <form class="form-inline">
                 <a href="#" class="btn btn-secondary mr-3" data-toggle="modal" data-target="#loginModal">Log In</a>
-                <a href="signup.html" class="btn btn-secondary">Sign Up</a>
+                <a href="#" class="btn btn-secondary">Sign Up</a>
               </form>
             </div>
           </nav>
@@ -97,124 +97,66 @@
             </div>
         </header>
         
-        
-        <!-- parallax START -->
-
-        <div class="bgimg-1">
-            <div class="caption">
-            <span class="border">What is Meeto?</span>
-            </div>
+      <div class="container">
+        <div class="row row-content mt-5">
+          <div class="col-12 mt-5">
+              <h2 class="mt-4">Sign Up for Meeto!</h2>
+              <hr />
           </div>
-          
-          <div style="color: #777;background-color:white;text-align:center;padding:50px 80px;text-align: justify;">
-            <h3 style="text-align:center;">A Meeto is an appointment</h3>
-            <p class="paralax-p">Have difficulty setting apointments with clients or others in your organization?  Take control of how appointment making should be.  Meeto is ready to help you never miss an appointment again!</p>
-          </div>
-          
-          <div class="bgimg-2">
-            <div class="caption">
-            <span class="border" style="color: #f7f7f7;">A Meeto is a hang out</span>
-            </div>
-          </div>
-          
-          <div style="position:relative;">
-            <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-            <p class="paralax-p">Want to find others like you who have the same interests?  Meeto can help.  You can create an Open Meeto to have others join your hang out.  Never feel like you’re the only one again!</p>
-            </div>
-          </div>
-          
-          <div class="bgimg-3">
-            <div class="caption">
-            <span class="border">A Meeto is a concert</span>
-            </div>
-          </div>
-          
-          <div style="position:relative;">
-              <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-              <p class="paralax-p">Get more people to know about your event.  Meeto can help others know about your concert, exhibition, show, etc.  Get the exposure that other social media platforms promise, but can’t deliver.</p>
-              </div>
-            </div>
-          
-          <div class="bgimg-4">
-              <div class="caption">
-              <span class="border">Anything you want it to be</span>
-              </div>
-            </div>
-          
-          
-          <div style="position:relative;">
-            <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
-            <p class="paralax-p">Join the Meeto community and see what is out there for you.  Be a part of the Meeto movement.</p>
-            </div>
-          </div>
-          
-          <div class="bgimg-5">
-            <div class="caption">
-                <a href="#" class="btn btn-primary mx-auto btn-lg">Click to make a Meeto</a> 
-            </div>
-          </div>
-
-
-        <!-- parallax END -->
-
-        <div class="container">
-            <div class="row mt-5 justify-content-around">
-                <div class="col-sm-5">
-                    <h2>What is Meeto?</h2>
-                </div>
-                <div class="col-sm-5"></div>
-            </div>
-            <div class="row mt-5 justify-content-around">
-                <div class="col-sm-5">
-                    <h3>A Meeto is an appointment</h3>
-                </div>
-                <div class="col-sm-5">
-                    <h3>A Meeto is a hangout</h3>
-                </div>
-            </div>
-                <div class="row mt-1 justify-content-around">
-                    <div class="col-sm-5 d-none d-sm-block">
-                        <p>
-                            Have difficulty setting apointments with clients or others in your organization?  Take control of how appointment making should be.  Meeto is ready to help you never miss an appointment again!
-                        </p>
-                    </div>
-                    <div class="col-sm-5 d-none d-sm-block">
-                        <p>
-                            Want to find others like you who have the same interests?  Meeto can help.  You can create an Open Meeto to have others join your hang out.  Never feel like you’re the only one again!
-                        </p>
+          <div class="col-md-10">
+              <form>
+                  <div class="form-group row">
+                      <label for="firstName" class="col-md-2 col-form-label">First Name</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="lastName" class="col-md-2 col-form-label">Last Name</label>
+                      <div class="col-md-10">
+                          <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                      <label for="email" class="col-md-2 col-form-label">Email</label>
+                      <div class="col-md-10">
+                          <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="username" class="col-md-2 col-form-label">Username</label>
+                    <div class="col-md-10">
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
                     </div>
                 </div>
-            <div class="row mt-5 justify-content-around">
-                <div class="col-sm-5">
-                    <h3>A Meeto is a concert</h3>
+                  <div class="form-group row">
+                    <label for="email" class="col-md-2 col-form-label">Confirm Email</label>
+                    <div class="col-md-10">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" />
+                    </div>
                 </div>
-                <div class="col-sm-5">
-                    <h3>A Meeto is anything you want it to be</h3>
+                    <div class="form-group row">
+                      <label for="password" class="col-md-2 col-form-label">Password</label>
+                      <div class="col-md-10">
+                          <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                      </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="password" class="col-md-2 col-form-label">Confirm Password</label>
+                    <div class="col-md-10">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" />
+                    </div>
                 </div>
-            </div>
-            <div class="row mt-1 justify-content-around">
-                <div class="col-sm-5 d-none d-sm-block">
-                    <p>
-                        Get more people to know about your event.  Meeto can help others know about your concert, exhibition, show, etc.  Get the exposure that other social media platforms promise, but can’t deliver.
-                    </p> 
-                </div>
-                <div class="col-sm-5">
-                    <p>
-                        Join the Meeto community and see what is out there for you.  Be a part of the Meeto movement.
-                    </p>
-                </div>
-            </div>
-
-            <div class="row mt-5">
-                <a href="#" class="btn btn-primary mx-auto btn-lg">Click to make a Meeto</a> 
-            </div>
-            <div class="row mt-3 mb-5">
-                <a href="#" class="btn btn-primary mx-auto btn-lg">Click for more information</a>
-            </div>
-            </div>
-
-        </div>
-
+                  <div class="form-group row">
+                      <div class="offset-md-2 col-md-10">
+                          <button type="submit" class="btn btn-primary">Sign Up</button>
+                      </div>
+                  </div>
+              </form>
+          </div>
+     </div>
+     </div>
+     
 
 
         
@@ -249,24 +191,7 @@
     <script src="node_modules/jquery/dist/jquery.slim.min.js"></script>
     <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!--
-    <script>
-        const func = () => {
-            let x = document.getElementsByClassName("concert");
-            x[0].style.backgroundImage="url(img/concert.jpg)"
-        }
-        func()
-    </script>
-    -->
-    <script>
-      $('#loginModal').on('shown.bs.modal', function (e) {
-      $(body).removeClass('modal-open');
-      $('#otherElement').addClass('modal-open');
-});
-$('#loginModal').on('hidden.bs.modal', function (e) {
-   $('#otherElement').removeClass('modal-open');
-});
-    </script>
+
 </body>
 
 </html>
