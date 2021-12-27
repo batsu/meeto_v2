@@ -6,20 +6,31 @@
   "scripts": {
     "lite": "lite-server",
     "start": "npm run lite",
+    "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss": "node-sass -o css/ css/"
   },
   "author": "Patrick Chao",
   "license": "ISC",
   "devDependencies": {
+    "dotenv": "^10.0.0",
     "lite-server": "^2.6.1",
-    "node-sass": "^5.0.0"
+    "node-sass": "^5.0.0",
+    "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "bootstrap": "^4.5.2",
     "bootstrap-social": "^5.1.1",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.2",
     "font-awesome": "^4.7.0",
     "jquery": "^3.5.1",
+    "method-override": "^3.0.0",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
     "popper.js": "^1.16.1"
   }
 }

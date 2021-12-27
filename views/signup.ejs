@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Additional CSS must be placed after Bootstrap CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" />
@@ -56,8 +56,8 @@
                 </li>
               </ul>
               <form class="form-inline">
-                <a href="#" class="btn btn-secondary mr-3" data-toggle="modal" data-target="#loginModal">Log In</a>
-                <a href="#" class="btn btn-secondary">Sign Up</a>
+                <a href="/login" class="btn btn-secondary mr-3">Log In</a>
+                <a href="/signup" class="btn btn-secondary">Sign Up</a>
               </form>
             </div>
           </nav>
@@ -73,7 +73,6 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form>
                             <div class="form-group row">
                                 <label for="userName" class="col-md-3 col-form-label">User Name</label>
                                 <div class="col-md-9">
@@ -100,6 +99,9 @@
       <div class="container">
         <div class="row row-content mt-5">
           <div class="col-12 mt-5">
+            <% if(messages.error) { %>
+              <h3><%= messages.error %></h3>
+              <% } %>
               <h2 class="mt-4">Sign Up for Meeto!</h2>
               <hr />
           </div>

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Additional CSS must be placed after Bootstrap CSS -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Open+Sans" />
@@ -45,7 +45,7 @@
                     Social
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Meeto Timeline</a>
+                    <a class="dropdown-item" href="/timeline">Meeto Timeline</a>
                     <a class="dropdown-item" href="#">Look for a Meeto</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Private Meeto</a>
@@ -56,8 +56,8 @@
                 </li>
               </ul>
               <form class="form-inline">
-                <a href="#" class="btn btn-secondary mr-3" data-toggle="modal" data-target="#loginModal">Log In</a>
-                <a href="#" class="btn btn-secondary">Sign Up</a>
+                <a href="/login" class="btn btn-secondary mr-3">Log In</a>
+                <a href="/signup" class="btn btn-secondary">Sign Up</a>
               </form>
             </div>
           </nav>
@@ -73,14 +73,7 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form>
-                            <div class="form-group row">
-                                <label for="userName" class="col-md-3 col-form-label">User Name</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" id="userName" name="userName" placeholder="User Name" />
-                                </div>
-                                
-                            </div>
+                        <form action="/signup" method="POST">
                             <div class="form-group row">
                                 <label for="password" class="col-md-3 col-form-label">Password</label>
                                 <div class="col-md-9">
@@ -100,17 +93,14 @@
       <div class="container">
         <div class="row row-content mt-5">
           <div class="col-12 mt-5">
-              <h2 class="mt-4">Sign Up for Meeto!</h2>
+              <% if(messages.error) { %>
+              <h3><%= messages.error %></h3>
+              <% } %>
+              <h2 class="mt-4">Login</h2>
               <hr />
           </div>
           <div class="col-md-10">
               <form action="/signup" method="POST">
-                  <div class="form-group row">
-                      <label for="name" class="col-md-2 col-form-label">Name</label>
-                      <div class="col-md-10">
-                          <input type="text" class="form-control" id="name" name="name" placeholder="Your name" />
-                      </div>
-                  </div>
                   <div class="form-group row">
                       <label for="email" class="col-md-2 col-form-label">Email</label>
                       <div class="col-md-10">
@@ -125,7 +115,7 @@
                   </div>
                   <div class="form-group row">
                       <div class="offset-md-2 col-md-10">
-                          <button type="submit" class="btn btn-primary">Sign Up</button>
+                          <button type="submit" class="btn btn-primary">Login</button>
                       </div>
                   </div>
               </form>
