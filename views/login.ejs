@@ -26,7 +26,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
             <a class="navbar-brand" href="/">
-                <img src="img/meeto.png" class="image-fluid" height="80" alt="" loading="lazy">
+              <img src="img/meeto.png" height="40" alt="" loading="lazy">
               </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
               </ul>
               <form class="form-inline">
                 <a href="/login" class="btn btn-secondary mr-3">Log In</a>
-                <a href="/signup" class="btn btn-secondary">Sign Up</a>
+                <a href="/register" class="btn btn-secondary">Sign Up</a>
               </form>
             </div>
           </nav>
@@ -73,7 +73,6 @@
                     </button>
                     </div>
                     <div class="modal-body">
-                        <form action="/signup" method="POST">
                             <div class="form-group row">
                                 <label for="password" class="col-md-3 col-form-label">Password</label>
                                 <div class="col-md-9">
@@ -93,14 +92,14 @@
       <div class="container">
         <div class="row row-content mt-5">
           <div class="col-12 mt-5">
-              <% if(messages.error) { %>
-              <h3><%= messages.error %></h3>
+            <% if(messages.error) { %>
+              <h3 class="mt-4"><%= messages.error %></h3>
               <% } %>
               <h2 class="mt-4">Login</h2>
               <hr />
           </div>
           <div class="col-md-10">
-              <form action="/signup" method="POST">
+              <form action="/login" method="POST">
                   <div class="form-group row">
                       <label for="email" class="col-md-2 col-form-label">Email</label>
                       <div class="col-md-10">
