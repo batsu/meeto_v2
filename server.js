@@ -34,8 +34,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-app.get('/', checkAuthenticated, (req, res) => {
-  res.render('index.ejs', { name: req.user.name })
+app.get('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    let holder = req.user.name.split(" ")
+    let useName = `${holder[0]} ${holder[holder.length - 1][0]}`
+    res.render('index.ejs', { name: useName })
+  } else {
+    res.render('index.ejs', { name: ""})
+  }
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -49,10 +55,16 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  res.render('register.ejs')
+  console.log(req.flash('message'))
+  res.render('register.ejs', { message: req.flash('message') })
 })
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
+  if (users.find(o => o.email === req.body.email)) {
+    req.flash('message', "Someone has already registered with that e-mail address")
+    console.log(req.flash('message'))
+    res.redirect('/register')
+  } else {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     users.push({
@@ -66,6 +78,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
   } catch {
     res.redirect('/register')
   }
+}
 })
 
 app.delete('/logout', (req, res) => {

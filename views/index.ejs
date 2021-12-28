@@ -55,6 +55,15 @@
                   <a class="nav-link" href="#" tabindex="-1">Help</a>
                 </li>
               </ul>
+
+              <% if(locals.name) { %>
+                <h3 class="mr-3">Hello, <%= name %></h3>
+                <form action="/logout?_method=DELETE" method="POST">
+                  <button class="btn btn-primary" type="submit">Log Out</button>
+              </form>
+              <% } %>
+
+              <% if(locals.name === "") { %>
               <form class="form-inline align-middle">
                 <!--
                   <a href="#" class="btn btn-secondary mr-3" data-toggle="modal" data-target="#loginModal">Log In</a>
@@ -62,6 +71,7 @@
                 <a href="/login" class="btn btn-secondary mr-3">Log In</a>
                 <a href="/register" class="btn btn-secondary">Sign Up</a>
               </form>
+              <% } %>
             </div>
           </nav>
 
