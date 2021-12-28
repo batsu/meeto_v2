@@ -12,7 +12,7 @@ nav {
 
 footer {
   border-top: black 1px solid;
-  background-color: #eeeeee;
+  background-image: #d4d4d4;
   color: white; }
 
 footer a {
@@ -47,22 +47,23 @@ body, html {
 
 .bgimg-2 {
   background-image: url("/img/hangout.jpg");
-  min-height: 400px; }
+  min-height: 100%; }
 
 .bgimg-3 {
   background-image: url("/img/concert.jpg");
-  min-height: 400px; }
+  min-height: 100%; }
 
 .bgimg-4 {
   background-image: url("/img/whatever.jpg");
-  min-height: 400px; }
+  min-height: 100%; }
 
 .bgimg-5 {
   background-image: url("/img/end.jpg");
-  min-height: 400px; }
+  min-height: 100%; }
 
 .paralax-p {
   max-width: 400px;
+  min-height: 100%;
   font-size: 1.25em;
   margin: 0 auto; }
 
@@ -99,3 +100,6 @@ body.modal-open {
 
 .navbar {
   padding-right: 16px !important; }
+
+.meeto-logo {
+  height: 80px; }
