@@ -10,6 +10,22 @@ const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 
+
+/* Mongo DB */
+
+
+const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://"+process.env.MONGO_USER+":<"+process.env.MONGO_PW+">@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("meeto").collection("meetos");
+  // perform actions on the collection object
+  console.log("Connected!")
+  client.close();
+});
+
+
+
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'static')));
 
@@ -44,12 +60,22 @@ app.get('/', (req, res) => {
   }
 })
 
+app.get('/timeline', (req, res) => {
+  if (req.isAuthenticated()) {
+    let holder = req.user.name.split(" ")
+    let useName = `${holder[0]} ${holder[holder.length - 1][0]}`
+    res.render('timeline.ejs', { name: useName })
+  } else {
+    res.render('timeline.ejs', { name: ""})
+  }
+})
+
 app.get('/login', checkNotAuthenticated, (req, res) => {
   res.render('login.ejs')
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/',
+  successRedirect: '/timeline',
   failureRedirect: '/login',
   failureFlash: true
 }))
