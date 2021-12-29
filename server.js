@@ -15,10 +15,6 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 
-/* Mongo DB */
-
-
-const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://"+process.env.MONGO_USER+":"+process.env.MONGO_PW+"@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
 const client = new MongoClient(uri)
 const database = client.db("meeto")
@@ -43,11 +39,11 @@ initializePassport(
   passport,
   async email => {
     await client.connect()
-    var emailVar = await usersdb.findOne({email: email}.email)
+    var emailVar = await usersdb.findOne({email: email})
     return emailVar
   },
   async id => {
-    var idVar = await usersdb.findOne({id: id}.id)
+    var idVar = await usersdb.findOne({id: id})
     await client.close()
     return idVar
   }
