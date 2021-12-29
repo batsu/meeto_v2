@@ -19,26 +19,20 @@ const methodOverride = require('method-override')
 
 
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://"+process.env.MONGO_USER+":<"+process.env.MONGO_PW+">@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  var collection = client.db("meeto").collection("meetos");
-  // perform actions on the collection object
-  console.log("Connected!")
-  client.close();
-});
+const uri = "mongodb+srv://"+process.env.MONGO_USER+":"+process.env.MONGO_PW+"@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
+const client = new MongoClient(uri)
+const database = client.db("meeto")
+const usersdb = database.collection('users')
 
-const addUser = userObj => {
-  client.connect(err => {
-    var collection = client.db("meeto").collection("users");
-    // perform actions on the collection object
-    collection.insertOne(userObj, function(err, res) {
-      if (err) throw err
-      console.log("1 document inserted")
-      client.db("meeto").close()
-    }
-  })
-  )}
+async function addUser(userObj) {
+  try {
+    await client.connect()
+    await usersdb.insertOne(userObj)
+    console.log("Added user successfully!")
+  } finally {
+    await client.close()
+  }
+}
 
 
 const path = require('path');
@@ -47,8 +41,16 @@ app.use(express.static(path.join(__dirname, 'static')));
 const initializePassport = require('./passport-config')
 initializePassport(
   passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
+  async email => {
+    await client.connect()
+    var emailVar = await usersdb.findOne({email: email}.email)
+    return emailVar
+  },
+  async id => {
+    var idVar = await usersdb.findOne({id: id}.id)
+    await client.close()
+    return idVar
+  }
 )
 
 const users = []
@@ -96,7 +98,6 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
 }))
 
 app.get('/register', checkNotAuthenticated, (req, res) => {
-  console.log(req.flash('message'))
   res.render('register.ejs', { message: req.flash('message') })
 })
 
@@ -114,9 +115,10 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       id: Date.now().toString(),
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      admin: false
     }
-    addUser(userObj)
+    addUser(userObj).catch(console.dir)
     res.redirect('/login')
   } catch {
     res.redirect('/register')
