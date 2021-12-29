@@ -11,19 +11,6 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 
 
-/* Mongo DB */
-
-
-const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://"+process.env.MONGO_USER+":<"+process.env.MONGO_PW+">@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-client.connect(err => {
-  const collection = client.db("meeto").collection("meetos");
-  // perform actions on the collection object
-  console.log("Connected!")
-  client.close();
-});
-
 
 
 const path = require('path');
@@ -32,8 +19,16 @@ app.use(express.static(path.join(__dirname, 'static')));
 const initializePassport = require('./passport-config')
 initializePassport(
   passport,
-  email => users.find(user => user.email === email),
-  id => users.find(user => user.id === id)
+  email => {
+    var emailVar = users.find(user => user.email === email)
+    console.log(emailVar)
+    return emailVar
+    },
+  id => {
+    var idVar = users.find(user => user.id === id)
+    console.log(idVar)
+    return idVar
+  }
 )
 
 const users = []

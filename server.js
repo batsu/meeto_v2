@@ -29,6 +29,8 @@ async function addUser(userObj) {
     await client.connect()
     await usersdb.insertOne(userObj)
     console.log("Added user successfully!")
+    var emailVar = await usersdb.findOne({email: userObj.email})
+    console.log(emailVar)
   } finally {
     await client.close()
   }
@@ -43,11 +45,12 @@ initializePassport(
   passport,
   async email => {
     await client.connect()
-    var emailVar = await usersdb.findOne({email: email}.email)
+    var emailVar = await usersdb.findOne({email: email})
+    console.log(emailVar)
     return emailVar
   },
   async id => {
-    var idVar = await usersdb.findOne({id: id}.id)
+    var idVar = await usersdb.findOne({id: id})
     await client.close()
     return idVar
   }
