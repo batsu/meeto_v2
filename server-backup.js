@@ -1,7 +1,3 @@
-/*
-server.js with MongoDB connection
-*/
-
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -22,23 +18,12 @@ const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://"+process.env.MONGO_USER+":<"+process.env.MONGO_PW+">@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
-  var collection = client.db("meeto").collection("meetos");
+  const collection = client.db("meeto").collection("meetos");
   // perform actions on the collection object
   console.log("Connected!")
   client.close();
 });
 
-const addUser = userObj => {
-  client.connect(err => {
-    var collection = client.db("meeto").collection("users");
-    // perform actions on the collection object
-    collection.insertOne(userObj, function(err, res) {
-      if (err) throw err
-      console.log("1 document inserted")
-      client.db("meeto").close()
-    }
-  })
-  )}
 
 
 const path = require('path');
@@ -101,26 +86,25 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 })
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-  /*
   if (users.find(o => o.email === req.body.email)) {
     req.flash('message', "Someone has already registered with that e-mail address")
     console.log(req.flash('message'))
     res.redirect('/register')
   } else {
-    */
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    var userObj = {
+    users.push({
       id: Date.now().toString(),
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword
-    }
-    addUser(userObj)
+    })
+    console.log(users)
     res.redirect('/login')
   } catch {
     res.redirect('/register')
   }
+}
 })
 
 app.delete('/logout', (req, res) => {
