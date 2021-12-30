@@ -26,7 +26,12 @@ async function addUser(userObj) {
     await client.connect()
     await usersdb.insertOne(userObj)
     console.log("Added user successfully!")
-  } finally {
+    return "ee"
+  } catch {
+    console.log("error")
+    return 0
+  }
+  finally {
     await client.close()
   }
 }
@@ -41,7 +46,6 @@ initializePassport(
   async email => {
     await client.connect()
     var emailVar = await usersdb.findOne({email: email})
-    client.close()
     return emailVar
   },
   async id => {
@@ -89,7 +93,7 @@ app.get('/timeline', async (req, res) => {
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login.ejs')
+  res.render('login.ejs', { message: req.flash('message')})
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
@@ -113,9 +117,12 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       password: hashedPassword,
       admin: false
     }
-    addUser(userObj).catch(console.dir)
+    const catchVal = await addUser(userObj)
+    catchVal.split("")
     res.redirect('/login')
-  } catch {
+  } catch(err) {
+    console.error(err)
+    req.flash('message',"e-mail already in use")
     res.redirect('/register')
   }
 })
