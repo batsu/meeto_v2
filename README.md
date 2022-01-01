@@ -2,6 +2,12 @@
 
 Hello!
 
-npm install
+Here's how to install Meeto!!!
 
-npm run devStart
+1. npm install
+
+2. npm run devStart
+
+3. Go to localhost:3000
+
+Database features will not run!
