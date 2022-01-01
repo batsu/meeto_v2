@@ -11,3 +11,5 @@ Here's how to install Meeto!!!
 3. Go to localhost:3000
 
 Database features will not run!
+- Login
+- Register
