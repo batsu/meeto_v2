@@ -13,12 +13,9 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
-
-
-/* Mongo DB */
-
-
 const { MongoClient } = require('mongodb');
+
+
 const uri = "mongodb+srv://"+process.env.MONGO_USER+":"+process.env.MONGO_PW+"@cluster0.a0dor.gcp.mongodb.net/meeto?retryWrites=true&w=majority";
 const client = new MongoClient(uri)
 const database = client.db("meeto")
@@ -29,9 +26,12 @@ async function addUser(userObj) {
     await client.connect()
     await usersdb.insertOne(userObj)
     console.log("Added user successfully!")
-    var emailVar = await usersdb.findOne({email: userObj.email})
-    console.log(emailVar)
-  } finally {
+    return "ee"
+  } catch {
+    console.log("error")
+    return 0
+  }
+  finally {
     await client.close()
   }
 }
@@ -46,17 +46,16 @@ initializePassport(
   async email => {
     await client.connect()
     var emailVar = await usersdb.findOne({email: email})
-    console.log(emailVar)
     return emailVar
   },
   async id => {
+    await client.connect()
     var idVar = await usersdb.findOne({id: id})
-    await client.close()
+    client.close()
     return idVar
   }
 )
 
-const users = []
 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false }))
@@ -70,32 +69,35 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
   if (req.isAuthenticated()) {
-    let holder = req.user.name.split(" ")
-    let useName = `${holder[0]} ${holder[holder.length - 1][0]}`
-    res.render('index.ejs', { name: useName })
+    
+    let holder = await req.user.name.split(" ")
+    let useName = await `${holder[0]} ${holder[holder.length - 1][0]}`
+    await res.render('index.ejs', { name: useName })
   } else {
     res.render('index.ejs', { name: ""})
   }
+
 })
 
-app.get('/timeline', (req, res) => {
+app.get('/timeline', async (req, res) => {
   if (req.isAuthenticated()) {
-    let holder = req.user.name.split(" ")
-    let useName = `${holder[0]} ${holder[holder.length - 1][0]}`
-    res.render('timeline.ejs', { name: useName })
+    await console.log(req.user)
+    let holder = await req.user.name.split(" ")
+    let useName = await `${holder[0]} ${holder[holder.length - 1][0]}`
+    await res.render('timeline.ejs', { name: useName })
   } else {
     res.render('timeline.ejs', { name: ""})
   }
 })
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
-  res.render('login.ejs')
+  res.render('login.ejs', { message: req.flash('message')})
 })
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-  successRedirect: '/timeline',
+  successRedirect: '/',
   failureRedirect: '/login',
   failureFlash: true
 }))
@@ -104,14 +106,8 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
   res.render('register.ejs', { message: req.flash('message') })
 })
 
+
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-  /*
-  if (users.find(o => o.email === req.body.email)) {
-    req.flash('message', "Someone has already registered with that e-mail address")
-    console.log(req.flash('message'))
-    res.redirect('/register')
-  } else {
-    */
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     var userObj = {
@@ -121,16 +117,19 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
       password: hashedPassword,
       admin: false
     }
-    addUser(userObj).catch(console.dir)
+    const catchVal = await addUser(userObj)
+    catchVal.split("")
     res.redirect('/login')
-  } catch {
+  } catch(err) {
+    console.error(err)
+    req.flash('message',"e-mail already in use")
     res.redirect('/register')
   }
 })
 
-app.delete('/logout', (req, res) => {
-  req.logOut()
-  res.redirect('/login')
+app.delete('/logout', async (req, res) => {
+  await req.logOut()
+  res.redirect('/')
 })
 
 function checkAuthenticated(req, res, next) {
